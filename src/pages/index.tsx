@@ -4,7 +4,7 @@ import { listPosts } from "../graphql/queries";
 import { ListPostsQuery } from "@/API";
 
 export default function Home() {
-  const [posts, setPosts] = useState<ListPostsQuery[] | any>([]);
+  const [posts, setPosts] = useState<any>([]);
 
   useEffect(() => {
     fetchPosts();
@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1 className="text-6xl font-bold underline">My Posts!</h1>
+      <h1 className="text-sky-400 text-6xl font-bold underline">My Posts!</h1>
       {posts.map((posts: any, index: any) => (
         <p key={index}>{posts.content}</p>
       ))}
