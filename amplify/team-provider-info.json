@@ -13,10 +13,18 @@
     },
     "categories": {
       "api": {
-        "nextjsaws": {}
+        "nextjsaws": {},
+        "AdminQueries": {}
       },
       "auth": {
-        "nextjsaws69688cf0": {}
+        "nextjsaws69688cf0": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "AdminQueries15cc889b": {
+          "deploymentBucketName": "amplify-nextjsaws-dev-160850-deployment",
+          "s3Key": "amplify-builds/AdminQueries15cc889b-7932496531455a617561-build.zip"
+        }
       }
     }
   }
