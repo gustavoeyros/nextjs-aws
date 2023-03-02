@@ -40,7 +40,7 @@ const CreatePost = () => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
-    // router.push(`/posts/${id}`);
+    router.push(`/posts/${id}`);
   }
   return (
     <div>

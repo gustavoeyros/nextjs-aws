@@ -6,7 +6,7 @@ const Profile = () => {
     <Authenticator>
       {({ signOut, user }) => (
         <div>
-          <h1 className="text-3x1 font-semibold tracking-wide mt-6">Profile</h1>
+          <h1 className="text-3xl font-semibold tracking-wide mt-6">Profile</h1>
           <h1 className="font-medium text-gray-500 my-2">
             Username: {user?.username}
           </h1>
