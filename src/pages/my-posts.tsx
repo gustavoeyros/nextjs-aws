@@ -4,7 +4,7 @@ import { Auth, API } from "aws-amplify";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Moment from "moment";
-import { deletePost } from "@/graphql/mutations";
+import { deletePost as deletePostMutation } from "@/graphql/mutations";
 const MyPosts = () => {
   const [posts, setPosts] = useState<any>([]);
   useEffect(() => {
@@ -19,6 +19,15 @@ const MyPosts = () => {
     })) as { data: PostsByUsernameQuery };
 
     setPosts(postData.data.postsByUsername?.items);
+  };
+
+  const deletePost = async (id: String) => {
+    await API.graphql({
+      query: deletePostMutation,
+      variables: { input: { id } },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    });
+    fetchPosts();
   };
 
   return (
@@ -44,7 +53,10 @@ const MyPosts = () => {
                 <Link href={`/posts/${post.id}`}>View Post</Link>
               </p>
 
-              <button className="text-sm mr-4 text-red-500 font-semibold">
+              <button
+                className="text-sm mr-4 text-red-500 font-semibold"
+                onClick={() => deletePost(post.id)}
+              >
                 Delete Post
               </button>
             </div>
