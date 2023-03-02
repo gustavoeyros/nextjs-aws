@@ -22,7 +22,7 @@ const CreatePost = () => {
   const { title, content } = post;
   const router = useRouter();
 
-  function onChange(e: any) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setPost(() => ({
       ...post,
       [e.target.name]: e.target.value,
