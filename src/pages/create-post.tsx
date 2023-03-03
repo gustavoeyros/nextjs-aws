@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { API } from "aws-amplify";
+import { useState, useRef, ChangeEvent } from "react";
+import { API, Storage } from "aws-amplify";
 import { useRouter } from "next/router";
 import { v4 as uuid } from "uuid";
 import { createPost } from "@/graphql/mutations";
@@ -15,11 +15,14 @@ const initialState = {
   id: "",
   title: "",
   content: "",
+  coverImage: "",
 };
 
 const CreatePost = () => {
   const [post, setPost] = useState(initialState);
+  const [image, setImage] = useState<File>();
   const { title, content } = post;
+  const imageFileInput = useRef<any>(null);
   const router = useRouter();
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -33,6 +36,11 @@ const CreatePost = () => {
     if (!title || !content) return;
     const id = uuid();
     post.id = id;
+    if (image) {
+      const filename = `${image.name}_${uuid()}`;
+      post.coverImage = filename;
+      await Storage.put(filename, image);
+    }
     await API.graphql({
       query: createPost,
       variables: {
@@ -42,6 +50,14 @@ const CreatePost = () => {
     });
     router.push(`/posts/${id}`);
   }
+  const uploadImage = async () => {
+    imageFileInput?.current?.click();
+  };
+  const handleChange = (e: any) => {
+    const fileUploaded = e.target.files[0];
+    if (!fileUploaded) return;
+    setImage(fileUploaded);
+  };
   return (
     <div>
       <h1 className="text-3xl font-semibold tracking-wide mt-6">
@@ -54,17 +70,31 @@ const CreatePost = () => {
         value={post.title}
         className="border-b pb-2 text-lg my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
       />
+      {image && <img src={URL.createObjectURL(image)} className="my-4" />}
       <SimpleMdeReact
         value={post.content}
         onChange={(value) => setPost({ ...post, content: value })}
       />
+      <input
+        type="file"
+        ref={imageFileInput}
+        className="absolute w-0 h-0"
+        onChange={handleChange}
+      />
+      <button
+        type="button"
+        className="bg-green-600 text-white font-semibold px-8 py-2 rounded-lg mr-2"
+        onClick={uploadImage}
+      >
+        Upload Cover Image
+      </button>
       <button
         type="button"
         className="bg-blue-600 text-white font-semibold px-8 py-2 rounded-lg"
         onClick={createNewPost}
       >
         Create Post
-      </button>
+      </button>{" "}
     </div>
   );
 };

@@ -1,0 +1,15 @@
+{
+  "resourceName": "postimages",
+  "policyUUID": "9ecd1ea8",
+  "bucketName": "nextjsaws8a46437d998f4eab85966d3180548cd5",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE"
+}

@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "nextjsaws69688cf0_identitypool_69688cf0",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "nextjs69688cf0",
     "userPoolName": "nextjsaws69688cf0_userpool_69688cf0",
     "autoVerifiedAttributes": [

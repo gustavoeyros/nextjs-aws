@@ -25,6 +25,9 @@
           "deploymentBucketName": "amplify-nextjsaws-dev-160850-deployment",
           "s3Key": "amplify-builds/AdminQueries15cc889b-7932496531455a617561-build.zip"
         }
+      },
+      "storage": {
+        "postimages": {}
       }
     }
   }
