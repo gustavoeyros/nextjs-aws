@@ -42,11 +42,23 @@ export default function Home() {
                 className="w-36 h-36 bg-contain bg-center rounded-full sm:x-0 sm:shrink-0"
               />
             )}
-            <div className="cursor-pointer border-b border-gray-300 mt-8 pb-4">
+            <div className="cursor-pointer mt-2 ">
               <h2 className="text-xl font-semibold" key={index}>
                 {posts.title}
               </h2>
               <p className="text-gray-500 mt-2">Author: {posts.username}</p>
+              {posts.comments.items.length > 0 &&
+                posts.comments.items.map((comment: any, index: number) => (
+                  <div
+                    key={index}
+                    className="py-8 px-8 max-w-xl mx-auto bg-white shadow-lg space-y-2 sm:py-1 sm:flex my-6 mx-12 sm:items-center sm:space-y-0 sm:space-x-6 mb-2"
+                  >
+                    <div>
+                      <p className="text-gray-500 mt-2">{comment.message}</p>
+                      <p className="text-gray-200 mt-1">{comment.createdBy}</p>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </Link>

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { createComment } from "@/graphql/mutations";
 import dynamic from "next/dynamic";
 import { v4 as uuid } from "uuid";
+import "easymde/dist/easymde.min.css";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
