@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { createComment } from "@/graphql/mutations";
 import dynamic from "next/dynamic";
 import { v4 as uuid } from "uuid";
+import { Auth, Hub } from "aws-amplify";
 import "easymde/dist/easymde.min.css";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
@@ -19,6 +20,7 @@ const initialState = {
 };
 
 const Post = ({ post }: any) => {
+  const [signedInUser, setSignedInUser] = useState(false);
   const [coverImage, setCoverImage] = useState(String);
   const [comment, setComment] = useState<any>(initialState);
   const [showMe, setShowMe] = useState(false);
@@ -28,6 +30,24 @@ const Post = ({ post }: any) => {
   const toggle = () => {
     setShowMe(!showMe);
   };
+
+  useEffect(() => {
+    authListener();
+  });
+  async function authListener() {
+    Hub.listen("auth", (data) => {
+      switch (data.payload.event) {
+        case "signIn":
+          return setSignedInUser(true);
+        case "signOut":
+          return setSignedInUser(false);
+      }
+    });
+    try {
+      await Auth.currentAuthenticatedUser();
+      setSignedInUser(true);
+    } catch (errpr) {}
+  }
 
   useEffect(() => {
     updateCoverImage();
@@ -71,13 +91,16 @@ const Post = ({ post }: any) => {
       </div>
 
       <div>
-        <button
-          type="button"
-          className="mb-4 bg-green-600 text-white font-semibold px-8 py-2 rounded-lg"
-          onClick={toggle}
-        >
-          Write a Comment
-        </button>
+        {signedInUser && (
+          <button
+            type="button"
+            className="mb-4 bg-green-600 text-white font-semibold px-8 py-2 rounded-lg"
+            onClick={toggle}
+          >
+            Write a Comment
+          </button>
+        )}
+
         {
           <div style={{ display: showMe ? "block" : "none" }}>
             <SimpleMDE

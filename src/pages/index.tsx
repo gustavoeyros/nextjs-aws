@@ -51,7 +51,7 @@ export default function Home() {
                 posts.comments.items.map((comment: any, index: number) => (
                   <div
                     key={index}
-                    className="py-8 px-8 max-w-xl mx-auto bg-white shadow-lg space-y-2 sm:py-1 sm:flex my-6 mx-12 sm:items-center sm:space-y-0 sm:space-x-6 mb-2"
+                    className="py-8 px-8 max-w-xl  bg-white shadow-lg space-y-2 sm:py-1 sm:flex my-6 mx-12 sm:items-center sm:space-y-0 sm:space-x-6 mb-2 rounded-lg"
                   >
                     <div>
                       <p className="text-gray-500 mt-2">{comment.message}</p>
