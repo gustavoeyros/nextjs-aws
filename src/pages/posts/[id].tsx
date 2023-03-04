@@ -5,9 +5,28 @@ import "../../../configureAmplify";
 import { listPosts, getPost } from "@/graphql/queries";
 import { GetPostQuery, ListPostsQuery } from "@/API";
 import { useEffect, useState } from "react";
+import { createComment } from "@/graphql/mutations";
+import dynamic from "next/dynamic";
+import { v4 as uuid } from "uuid";
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
+const initialState = {
+  id: "",
+  message: "",
+};
 
 const Post = ({ post }: any) => {
   const [coverImage, setCoverImage] = useState(String);
+  const [comment, setComment] = useState<any>(initialState);
+  const [showMe, setShowMe] = useState(false);
+  const router = useRouter();
+  const { message } = comment;
+
+  const toggle = () => {
+    setShowMe(!showMe);
+  };
 
   useEffect(() => {
     updateCoverImage();
@@ -20,11 +39,26 @@ const Post = ({ post }: any) => {
     }
   };
 
-  const router = useRouter();
-
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
+
+  const createTheComment = async () => {
+    if (!message) return;
+    const id = uuid();
+    comment.id = id;
+    try {
+      await API.graphql({
+        query: createComment,
+        variables: { input: comment },
+        authMode: "AMAZON_COGNITO_USER_POOLS",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/my-posts");
+  };
+
   return (
     <div>
       <h1 className="text-5xl mt-4 font-semibold tracing-wide">{post.title}</h1>
@@ -33,6 +67,33 @@ const Post = ({ post }: any) => {
       <p className="text-sm font-light my-4">By {post.username}</p>
       <div className="mt-8">
         <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          className="mb-4 bg-green-600 text-white font-semibold px-8 py-2 rounded-lg"
+          onClick={toggle}
+        >
+          Write a Comment
+        </button>
+        {
+          <div style={{ display: showMe ? "block" : "none" }}>
+            <SimpleMDE
+              value={comment.message}
+              onChange={(value) =>
+                setComment({ ...comment, message: value, postID: post.id })
+              }
+            />
+            <button
+              type="button"
+              className="mb-4 bg-blue-600 text-white font-semibold px-8 py-2 rounded-lg"
+              onClick={createTheComment}
+            >
+              Save
+            </button>
+          </div>
+        }
       </div>
     </div>
   );

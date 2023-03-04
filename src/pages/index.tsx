@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div>
       <h1 className="text-sky-400 text-3xl font-bold tracking-wide mt-6 mb-2">
-        My Posts
+        Posts
       </h1>
       {posts.map((posts: any, index: any) => (
         <Link key={index} href={`/posts/${posts.id}`}>

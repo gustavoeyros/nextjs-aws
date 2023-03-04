@@ -1,7 +1,7 @@
 {
   "resourceName": "postimages",
-  "policyUUID": "9ecd1ea8",
-  "bucketName": "nextjsaws8a46437d998f4eab85966d3180548cd5",
+  "policyUUID": "2bbca9e9",
+  "bucketName": "nextamplify2a1e7d9dcec7445db24977acf1dc873f",
   "storageAccess": "authAndGuest",
   "guestAccess": [
     "READ"
@@ -11,5 +11,6 @@
     "READ",
     "DELETE"
   ],
-  "triggerFunction": "NONE"
+  "triggerFunction": "NONE",
+  "groupAccess": {}
 }

@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "nextjsaws69688cf0_identitypool_69688cf0",
+    "identityPoolName": "nextamplify81c11d98_identitypool_81c11d98",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "nextjs69688cf0",
-    "userPoolName": "nextjsaws69688cf0_userpool_69688cf0",
+    "resourceNameTruncated": "nextam81c11d98",
+    "userPoolName": "nextamplify81c11d98_userpool_81c11d98",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,15 +31,13 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "nextjs69688cf0_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "nextam81c11d98_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "69688cf0",
-    "resourceName": "nextjsaws69688cf0",
+    "sharedId": "81c11d98",
+    "resourceName": "nextamplify81c11d98",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
-    "userPoolGroupList": [
-      "teste"
-    ],
+    "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
@@ -56,7 +54,6 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "adminQueryGroup": "teste"
+    "dependsOn": []
   }
 }
