@@ -40,6 +40,14 @@ export const listPosts = /* GraphQL */ `
         username
         coverImage
         comments {
+          items {
+            id
+            message
+            postID
+            createdAt
+            updatedAt
+            createdBy
+          }
           nextToken
         }
         createdAt

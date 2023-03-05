@@ -14,13 +14,13 @@ export default function Home() {
 
   const setUpSubscriptions = () => {
     subOnCreate = API.graphql<GraphQLSubscription<NewOnCreatePostSubscription>>(
-      (graphqlOperation(newOnCreatePost) as any).subscribe({
-        next: (postData: any) => {
-          console.log(postData.value);
-          setPosts(postData);
-        },
-      })
-    );
+      graphqlOperation(newOnCreatePost)
+    ).subscribe({
+      next: (postData: any) => {
+        console.log(postData.value);
+        setPosts(postData);
+      },
+    });
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Home() {
     return () => {
       subOnCreate.unsubscribe();
     };
-  });
+  }, []);
 
   useEffect(() => {
     fetchPosts();
