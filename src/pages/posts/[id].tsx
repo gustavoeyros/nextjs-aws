@@ -82,12 +82,14 @@ const Post = ({ post }: any) => {
 
   return (
     <div>
-      <h1 className="text-5xl mt-4 font-semibold tracing-wide">{post.title}</h1>
+      <h1 className="text-5xl mt-4 font-semibold tracing-wide">
+        {post?.title}
+      </h1>
       {coverImage && <img src={coverImage} className="mt4" />}
 
-      <p className="text-sm font-light my-4">By {post.username}</p>
+      <p className="text-sm font-light my-4">By {post?.username}</p>
       <div className="mt-8">
-        <ReactMarkdown>{post.content}</ReactMarkdown>
+        <ReactMarkdown>{post?.content}</ReactMarkdown>
       </div>
 
       <div>
