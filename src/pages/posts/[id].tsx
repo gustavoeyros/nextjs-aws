@@ -50,11 +50,13 @@ const Post = ({ post }: any) => {
   }
 
   useEffect(() => {
-    updateCoverImage();
-  }, []);
+    if (post) {
+      updateCoverImage();
+    }
+  }, [post]);
 
   const updateCoverImage = async () => {
-    if (post.coverImage) {
+    if (post?.coverImage) {
       const imageKey = await Storage.get(post.coverImage);
       setCoverImage(imageKey);
     }
